@@ -2,6 +2,12 @@ body{
     background-color: antiquewhite;
 }
 
+.light-dark{
+    background: #333;
+    color: white;
+    
+}
+
 
 
 .hidden-content{
@@ -10,4 +16,8 @@ body{
 
 .hidden-content.reveal-btn{
     display:block;
+}
+
+#form{
+    width: 50%;
 }

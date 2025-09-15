@@ -6,11 +6,13 @@ function changeColor(){
 heading.addEventListener("mouseover", changeColor)
 
 
-// Dark Mode 
 
-function toggleTheme(){
-    document.body.classList.toggle("dark")
-};
+// Dark Mode 
+function darkFunction() {
+    var element = document.body;
+    element.classList.toggle("light-dark");
+}
+
 
 
 
@@ -30,55 +32,31 @@ revealBtn.addEventListener('click', revealContent)
 
 
 // form validation
-document.getElementById("myForm").onsubmit = function(event) {
-    event.preventDefault(); 
-    
+const name = document.getElementById('name');
+const password = document.getElementById('password');
+const form = document.getElementById('form');
+const errorElement = document.getElementById('error')
 
-
-
-    let username = document.getElementById("username").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let password = document.getElementById("passwor").value.trim();
-
-
-    document.getElementById("usernameError").innerText = "";
-    document.getElementById("emailError").innerText = "";
-    document.getElementById("passwordError").innerText = "";
-
-    let isValid = true;
-
-// Username Validation 
-    if (username === "") {
-        document.getElementById("usernameError").innerText = "Username is required."
-;   isValid = false;
- } else if (username.length < 5)
- {
-    document.getElementById("usernameError").innerText = "Username must be at least 5 characters.";
-    isValid = false;
- }
-
-// Email validation
- let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === "") {
-        document.getElementById("emailError").innerText = "Email is required.";
-        isValid = false;
-    } else if (!emailPattern.test(email)) {
-        document.getElementById("emailError").innerText = "Invalid email format.";
-        isValid = false;
+form.addEventListener('submit', (e) =>{
+    let messages = []
+   
+    if (name.value === "" || name.value === null){
+        messages.push("Name is required")
     }
 
-// password validation
- let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A=Za-z\d]{8,}$/;
- if (password === ""){
-    document.getElementById("passwordError").innerText = "password is required.";
-    isValid = false;
- } else if (!passwordPattern.test(password)){
-    document.getElementById("passwordError").innerText = "Password must be at least 8 characters, including numbers and letters. ";
-    isValid = false;
- }
+    if (password.value === "" || password.value === null){
+        messages.push("Password is required!")
+    }
 
- if (isValid){
-    alert("Form submitted sucessfully!")
-    document.getElementById("myForm").reset();
- }
-}
+    if (password.value.length >= 8 || password.value.length < 20){
+        messages.push('Password must be 8 and less than 20 characters')
+    }
+
+    
+    if (messages.length > 0){
+        e.preventDefault()
+        errorElement.innerText = messages.join(', ')
+
+    }
+    
+});
